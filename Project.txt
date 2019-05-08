@@ -1,0 +1,117 @@
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import java.awt.*;
+
+public class Project implements ActionListener 
+{
+int x=0,a,c;
+Integer power,newpower;
+String s,sp,sub,nss,iss,is="";
+String[] sa=new String[25];
+Button b;
+TextField t;
+Label li;
+
+
+	public void Run()
+	{ 
+ 	 Label dx=new Label("dx");
+	Label ix=new Label(" 	");
+	   
+		b=new Button("Integrate");
+		t=new TextField();
+		li=new Label();
+		Frame f=new Frame();
+		f.setSize(400,400);
+		Panel p=new Panel();
+		p.setLayout(null);
+		t.setBounds(75,50,250,25);
+		li.setBounds(75,150,350,50);
+		ix.setBounds(50,50, 50,25);
+		dx.setBounds(325,50,50,25);
+		
+		b.setBounds(200,300,100,50);
+		b.addActionListener(this);
+		p.add(t);
+		p.add(dx);
+	    	p.add(ix);
+		p.add(li);
+		p.add(b);
+		f.add(p);
+		
+		f.show();
+	}
+	public static void main(String arg[])
+	{
+		Project i=new Project();
+		i.Run();
+		
+	}
+public void actionPerformed(ActionEvent e) 
+	{
+		if(e.getSource()==b)
+		{
+		s=t.getText();
+		sp=s.replace("+","p");
+	
+		  for (String Strp: sp.split("p"))
+		      {
+			  Strp="p"+Strp;
+		  for (String Str: Strp.split("-"))
+		      {
+			  Str="-"+Str;
+			    sa[x]=Str;
+		         System.out.println(Str);
+		         x++;
+  		      }
+  		      }
+		  for(int i=0;i<x;i++)
+		  {
+			if(sa[i].contains("x")) 
+			{
+			if(sa[i].contains("^"))
+			{
+			a=sa[i].indexOf("^");
+			System.out.println("Location of ^"+a);
+			sub = sa[i].substring(a+1,sa[i].length());
+			power=power.valueOf(sub);
+			System.out.println("num after ^"+sub);
+			newpower=power+1;
+			System.out.println("new pow after ^ "+newpower);
+			nss=nss.valueOf(newpower)+"/"+nss.valueOf(newpower);
+			System.out.println("Integrated  power "+nss);
+			sa[i]=sa[i].substring(0,a+1)+nss;
+			System.out.println("Integrated  sub string "+sa[i]);
+			}
+			else
+			{
+			sa[i]=sa[i]+"^2/2";
+			System.out.println("Integrated  sub string without ^ "+sa[i]);
+			}
+			}
+			else 
+			{
+			sa[i]=sa[i]+"x";
+			System.out.println("new Substring of Constant"+sa[i]);
+			}
+			is=is+sa[i];
+		  }
+		   is=is.replace("-p","+");
+			System.out.println("integrated complete String"+is);
+		if(is.charAt(2)=='-')
+		{
+			li.setText(is.substring(2,is.length())+"+c");
+		}
+		else{
+		  li.setText(is.substring(1,is.length())+"+c");
+		}
+		  x=0;
+		  is="";
+	
+		}
+		
+	}
+
+}
